@@ -4,13 +4,11 @@
     <title>Upload form</title>
 </head>
 <body>
-    <h1>Spring MVC multi files uploader</h1>
+    <h1>Spring MVC single file uploader</h1>
 
-    <form:form method="post" action="${pageContext.request.contextPath}/uploadMulti"
+    <form:form method="post" action="${pageContext.request.contextPath}/upload"
     modelAttribute="uploadForm" enctype="multipart/form-data">
 
-        <input type="file" name="files" /><br>
-        <input type="file" name="files" /><br>
         <input type="file" name="files" /><br><br>
         <input type="submit" value="submit" />
 

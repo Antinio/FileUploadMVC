@@ -86,7 +86,7 @@
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/spring4upload</contextPath>
+                        <contextPath>/antinio/spring4upload</contextPath>
                     </webApp>
                 </configuration>
             </plugin>

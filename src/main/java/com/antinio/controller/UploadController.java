@@ -7,6 +7,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,14 +21,38 @@ import java.util.StringJoiner;
 public class UploadController {
 
     //Save uploaded file in folder
-    private static String UPLOADED_FOLDER = "C://temp//";
+    private static String UPLOADED_FOLDER = "C:\\temp\\";
 
     @GetMapping("/")
     public String index(){
         return "upload";
     }
 
-    @PostMapping("/upload")
+    @GetMapping("/upload")
+    public String singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
+
+        if (file.isEmpty()){
+            redirectAttributes.addFlashAttribute("message", "Please select file to upload");
+            return "redirect:uploadStatus";
+        }
+
+        try {
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            redirectAttributes.addFlashAttribute("message",
+                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:uploadStatus";
+
+    }
+
+    @PostMapping("/uploadMulti")
     public String multiFileUpload(@ModelAttribute UploadForm form,
             RedirectAttributes redirectAttributes) {
 
