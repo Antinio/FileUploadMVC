@@ -24,11 +24,21 @@ public class UploadController {
     private static String UPLOADED_FOLDER = "C:\\temp\\";
 
     @GetMapping("/")
-    public String index(){
-        return "upload";
+    public String indexPage(){
+        return "index";
     }
 
     @GetMapping("/upload")
+    public String upload(){
+        return "upload";
+    }
+
+    @GetMapping("/uploadMulti")
+    public String uploadMulti(){
+        return "uploadMulti";
+    }
+
+    @PostMapping("/uploadForm")
     public String singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
 
         if (file.isEmpty()){
@@ -52,7 +62,7 @@ public class UploadController {
 
     }
 
-    @PostMapping("/uploadMulti")
+    @PostMapping("/uploadMultiForm")
     public String multiFileUpload(@ModelAttribute UploadForm form,
             RedirectAttributes redirectAttributes) {
 
@@ -81,13 +91,12 @@ public class UploadController {
         } else {
             redirectAttributes.addAttribute("message", "You successfully uploaded '" + uploadFileName + "'");
         }
-        return "redirect:/uploadStatus";
+        return "redirect:uploadStatus";
     }
 
     @GetMapping("/uploadStatus")
     public String uploadStatus() {
         return "uploadStatus";
     }
-
 
 }

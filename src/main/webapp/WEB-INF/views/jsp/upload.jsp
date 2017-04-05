@@ -6,11 +6,11 @@
 <body>
     <h1>Spring MVC single file uploader</h1>
 
-    <form:form method="post" action="${pageContext.request.contextPath}/upload"
+    <form:form method="post" action="${pageContext.request.contextPath}/uploadForm"
     modelAttribute="uploadForm" enctype="multipart/form-data">
 
-        <input type="file" name="files" /><br><br>
-        <input type="submit" value="submit" />
+        <input type="file" name="file" /><br><br>
+        <input type="submit" value="Submit" />
 
     </form:form>
 
